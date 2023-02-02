@@ -1,5 +1,9 @@
 package spring.springsecurity.security;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,14 +16,17 @@ public class SimpleUser implements UserDetails {
 
     private String password;
 
-    public SimpleUser(String username, String password){
+    private String authority;
+
+    public SimpleUser(String username, String password,String authority){
         this.username = username;
         this.password = password;
+        this.authority = authority;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(()->"READ");
+        return List.of(()->authority);
     }
 
     @Override

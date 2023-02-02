@@ -1,0 +1,1 @@
+filter -> manager -> provider -> PassEncoder, userDetailsService->  userDetails -(1:N)> grantedAuthority

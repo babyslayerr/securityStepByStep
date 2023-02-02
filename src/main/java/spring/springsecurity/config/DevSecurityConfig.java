@@ -16,13 +16,13 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import spring.springsecurity.security.CustomAuthenticationProvider;
+
 
 @Configuration
 public class DevSecurityConfig {
 
-    @Autowired
-    private CustomAuthenticationProvider authenticationProvider;
+//    @Autowired
+//    private CustomAuthenticationProvider authenticationProvider;
 
     // 제대로 적용이 안되는 것 같은데...
     // 웹 브라우저에서는 되고 포스트맨에서는 인증을 받네 tool이라서 ip도 같은건데 뭐가 차이가 있나?
@@ -43,10 +43,10 @@ public class DevSecurityConfig {
     }
 
     // authenticationProvider을 authenticationManger에 다시 세팅
-    @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception{
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
-        return authenticationManagerBuilder.build();
-    }
+//    @Bean
+//    public AuthenticationManager authManager(HttpSecurity http) throws Exception{
+//        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+//        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
+//        return authenticationManagerBuilder.build();
+//    }
 }
