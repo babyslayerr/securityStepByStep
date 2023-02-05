@@ -8,9 +8,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import spring.springsecurity.security.InMemoryUserDetailsService;
 import spring.springsecurity.security.SimpleUser;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 // 이것만 사용하면 userDetailService와 passwordEncoder만 재정의하고
@@ -32,12 +34,20 @@ public class UserManagementConfig {
 //        userDetailService.createUser(user);
 //        return userDetailService;
 //    }
-    @Bean
-    public UserDetailsService userDetailsService(){
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//
+//        SimpleUser user = new SimpleUser("bill","123456789","READ");
+//        List<UserDetails> users = List.of(user);
+//        return new InMemoryUserDetailsService(users);
+//    }
 
-        SimpleUser user = new SimpleUser("bill","123456789","READ");
-        List<UserDetails> users = List.of(user);
-        return new InMemoryUserDetailsService(users);
+
+    // 사용자 자격증명들이 db에 적재 되어 있는 경우
+    @Bean
+        public UserDetailsService userDetailsService(DataSource dataSource){
+
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
